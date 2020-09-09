@@ -1,0 +1,11 @@
+,Cluster :0,Cluster :1,Cluster :2,Cluster :3,Cluster :4,Cluster :5
+0,receptor,receptor,national,compound,tumor,concentration
+1,allosteric,scripps,lymp,inhibitor,mouse,inhibition
+2,muscarinic,agonist,ncgc,burnham,treated,growth
+3,machr,neuropeptide,line,kinase,measurement,endpoint
+4,selective,channel,niehs,cancer,measured,line
+5,modulators,antagonist,toxicology,library,group,required
+6,cotransporter,sphingosinephosphate,environmental,pathway,model,tested
+7,glutamate,fprl,quantitative,growth,intraperitoneal,level
+8,agonist,ligand,program,enzyme,vehicle,tumor
+9,metabotropic,nuclear,awell,molecule,anticancer,approriate

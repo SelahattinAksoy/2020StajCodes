@@ -1,0 +1,240 @@
+<html>
+
+
+
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<script src=" https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+{% load static %}
+
+  <link rel="stylesheet"  href="{% static 'css/admin.css' %}" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<body>
+
+<div class="wrapper">
+
+    <div class="sidebar">
+
+        <h2>Cluster Page</h2>
+
+        <ul>
+
+            <li><a  onclick="activate('2d_graph')" href="#"><i class="fa fa-signal"></i>  2d Graph</a></li>
+            <li><a  onclick="activate('3d_graph')"  href="#"><i class="fa fa-signal"></i> 3d Graph</a></li>
+            <li><a  onclick="activate('detail')" href="#"><i class="fa fa-book"></i> Details</a></li>
+
+
+        </ul> 
+
+        
+
+    </div>
+
+    <div class="main_content">
+     <br>
+       
+
+
+
+
+
+
+
+       <!-- Upload file Part -->
+
+        <div id="upload_file" style="display:none;margin:12px">
+                
+                 <h3 style="text-align:center">3D Graph</h3><hr>
+                <div class="container">
+                    <div class="row">
+                             <div class="col-md-2"></div>
+
+                             <div class="btn-group btn-group-lg col-md-8" role="group" aria-label="Basic example">
+                                            {% include "button.html" %}
+                             </div>
+                            
+                    
+                    </div>
+                </div>
+    
+        </div>
+
+      <!-- check file Part -->
+
+        <div style="width:100%; height:90%; display:none;" id="3d_graph" >
+              <h3 style="text-align:center">3D Graph</h3><hr><br>
+                <p  style="text-align:center">*Choose the cluster to show file that included by cluster</p>
+                <div class="container">
+                    <div class="row">
+                             <div class="col-md-3"></div>
+
+                            
+                             <div class="btn-group btn-group-lg col-md-8" role="group" aria-label="Basic example">
+                                             {% include "button.html" %}<br>
+                                            
+                             </div>
+                             <div id="plot_id" style="width:100%; height:100%">{{plot_div_3d|safe}}</div>
+                               {% include "file_name.html" %}
+                        
+                    
+                    </div>
+                </div>
+
+        </div>
+
+
+
+
+
+
+        <!-- Cluster  Part -->
+
+        <div style="width:100%; height:90%; display:none;" id="2d_graph" >
+
+                             <h3 style="text-align:center">2D Graph</h3><hr>
+
+                      <div class="container">
+                    <div class="row">
+                             <div class="col-md-2"></div>
+
+                   
+                             <div class="btn-group btn-group-lg col-md-8" role="group" aria-label="Basic example">
+                                           
+                             </div>
+                             <div id="plot_id" style="width:100%; height:100%">{{plot_div|safe}}</div>
+                            
+                    
+                    </div>
+                </div>
+        
+                    
+
+           
+        </div>
+
+
+
+    <!-- Ayrıntılar List Part -->
+    <div id="detail" style="display:none">
+             <h3 style="text-align:center">İnformation About Data</h3><hr>
+            
+              <div class="container">
+                    <div class="row">
+                               <div class="col-sm">
+                               <canvas id="doughnut-chart" ></canvas>
+                                    <p  style="text-align:center">*Choose the cluster to show top 10 words that included by cluster</p>
+                            </div>
+                        
+                    </div>
+                    <div class="row">
+                             <div class="col-md-2"></div>
+ 
+                   
+                             <div class="btn-group btn-group-lg col-md-8" role="group" aria-label="Basic example">
+                                    <button onclick="activate2('Cluster_0_top_10_words')"   type="button"  class="btn btn btn-primary">Cluster 0</button>
+                                    <button onclick="activate2('Cluster_1_top_10_words')"   type="button" class="btn btn btn-primary">Cluster 1</button>
+                                    <button onclick="activate2('Cluster_2_top_10_words')"   type="button" class="btn btn btn-primary">Cluster 2</button>
+                                    <button onclick="activate2('Cluster_3_top_10_words')"   type="button" class="btn btn btn-primary">Cluster 3</button>
+                                    <button onclick="activate2('Cluster_4_top_10_words')"   type="button" class="btn btn btn-primary">Cluster 4</button>           
+                                    <button onclick="activate2('Cluster_5_top_10_words')"   type="button" class="btn btn btn-primary">Cluster 5</button>
+                             </div>
+                            {% include "words_name.html"  %}
+                             <br><br>
+
+                </div>
+
+    </div>
+   
+  
+
+
+</div>
+
+
+
+
+
+</body>
+
+<script>
+
+
+
+all_id=["upload_file","3d_graph","2d_graph","detail","s"]
+all_inner_id=["Cluster_0_top_10_words","Cluster_1_top_10_words","Cluster_2_top_10_words",
+"Cluster_3_top_10_words","Cluster_4_top_10_words","Cluster_5_top_10_words",
+"cluster_0_file_name","cluster_1_file_name","cluster_2_file_name","cluster_3_file_name","cluster_4_file_name","cluster_5_file_name"]
+
+function activate(id){
+ 
+    for (i in all_id){
+          
+
+        if(all_id[i]===id){
+         
+            document.getElementById(all_id[i]).style.display='block'
+
+        }else{
+
+            document.getElementById(all_id[i]).style.display='none'
+
+        }
+
+    }
+
+}
+
+function activate2(id){
+
+    for (i in all_inner_id){
+
+        if(all_inner_id[i]==id){
+
+            document.getElementById(all_inner_id[i]).style.display='block'
+
+        }else{
+
+            document.getElementById(all_inner_id[i]).style.display='none'
+
+        }
+
+    }
+}
+
+</script>
+
+<script>
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Cluster 0", "Cluster 1", "Cluster 2", "Cluster 3", "Cluster 4","Cluster 5"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: {{Number_of_cluster_member}},
+          hoverBorderWidth:"32px"
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Number of member in clusters'
+      },
+ 
+    }
+});
+
+</script>
+
+</html>
+</html>
